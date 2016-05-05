@@ -117,7 +117,7 @@ class usersAdminService {
      *  @return object 
 	**/
 	
-	public function isUsersExits($item){
+	public function isUserExists($item){
 		$this->mongoConnect->connect();
 		$this->conn = $this->mongoConnect->connection;
 		$database 	= $this->conn->{DATABASE_NAME};

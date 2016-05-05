@@ -77,7 +77,11 @@ $app->group('/utils', function () use ($app) {
 	/**
 	 * API to register new user.
      *  First we have to create user document in user collection and then create new mobileAuth document
-     *  Second generate the token and return this token
+     *  Second generate the token and return this token.
+     * @param string mobileNumber
+     * @param Username
+     * @param Password
+     * @return token (JWT)
 	 */
 	$app->post('/register', function (Request $request, Response $response, $args) {
 
@@ -113,7 +117,7 @@ $app->group('/utils', function () use ($app) {
             $usersAdminService = new usersAdminService();
 
             //Is user exits
-            $result = $usersAdminService->isUsersExits($item);
+            $result = $usersAdminService->isUserExists($item);
 
             if($result){
                 // user already exits.
@@ -139,8 +143,8 @@ $app->group('/utils', function () use ($app) {
                     if($result){
                         $user = $mobileAuthService->getUserByMobile($item);
 
-                        //wow great we have successfully create user and mobileAuth its time to generate token
-                        $output->jwt = generateNewToken($user['authData']);
+                        //wow great we have successfully create user and mobileAuth its time to generate JWT token
+                        $output->jwt = generateNewToken($user['authData']); 
 
                         $output->result = true;
                         $output->message = "User created successfully.";
