@@ -11,7 +11,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require_once __DIR__ . '/../include/utility/utility.php';
 require_once __DIR__ . '/../include/utility/authenticateMiddleware.php';
 require_once __DIR__ . '/../include/services/usersAdminService.php';
-require_once __DIR__ . '/../include/services/mobileAuthService.php';
+require_once __DIR__ . '/../include/services/authServices.php';
 
 include __DIR__ . '/../model/UserProfile.php';
 
@@ -51,8 +51,8 @@ $app->group('/utils', function () use ($app) {
      * API to login
      */
 
-    $app->get('/login', function (Request $request, Response $response, $args) {
-        $this->logger->info("In-Tuition '/login' route");
+    $app->get('/mobile_login', function (Request $request, Response $response, $args) {
+        $this->logger->info("In-Tuition '/mobile_login' route");
 
         $item = new stdClass();
         $output = new stdClass();
@@ -60,16 +60,16 @@ $app->group('/utils', function () use ($app) {
         $item->mobileNumber = $request->getHeaderLine('Mobile-Number');
 
         // Let create the mobileAuth object
-        $mobileAuthService = new mobileAuthService();
+        $authServices = new authServices();
 
-        $result = $mobileAuthService->getUserByMobile($item);
-
-        // Let generate the new JWT token
-        $output->jwt = generateNewToken($result['authData']);
+        $result = $authServices->getUserByMobile($item);
+        $item->_id = $result['_id'];
+        $item->authData = $result['authData'];
+       // Let generate the new JWT token
+        $output->jwt = generateNewToken($item);
         $output->result = true;
         $output->message = "Login successfully.";
         $response->withJson($output);
-
         return $response;
     })->add( new authenticateMiddleware());
 
@@ -133,14 +133,16 @@ $app->group('/utils', function () use ($app) {
                 $result = $usersAdminService->createUsers($item);
                 if($result){
                     // New user document created successfully its time to create new mobileAuth document for this user
-                    $mobileAuthService = new mobileAuthService();
+                    $authService = new authServices();
 
-                    $result = $mobileAuthService->createMobileAuth($item);
+                    $result = $authService->createMobileAuth($item);
                     if($result){
-                        $user = $mobileAuthService->getUserByMobile($item);
-
+                        $data = new stdClass();
+                        $user = $authService->getUserByMobile($item);
+                        $data->_id = $user['_id'];
+                        $data->authData = $user['authData'];
                         //wow great we have successfully create user and mobileAuth its time to generate token
-                        $output->jwt = generateNewToken($user['authData']);
+                        $output->jwt = generateNewToken($data);
 
                         $output->result = true;
                         $output->message = "User created successfully.";

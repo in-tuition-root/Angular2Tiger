@@ -4,7 +4,7 @@
  * @author Pramod Kumar Raghav
  *
  */
-class mobileAuthService {
+class authServices {
 	private $conn;
 	
 	function __construct() {
@@ -33,7 +33,7 @@ class mobileAuthService {
 		$this->mongoConnect->connect();
 		$this->conn = $this->mongoConnect->connection;
 		$database 	= $this->conn->{DATABASE_NAME};
-		$collection = $database->selectCollection(COLLECTION_MOBILE_AUTH);
+		$collection = $database->selectCollection(COLLECTION_AUTH);
 		
 		$array = array();
 		
@@ -65,7 +65,7 @@ class mobileAuthService {
 		$this->mongoConnect->connect();
 		$this->conn = $this->mongoConnect->connection;
 		$database 	= $this->conn->{DATABASE_NAME};
-		$collection = $database->selectCollection(COLLECTION_MOBILE_AUTH);
+		$collection = $database->selectCollection(COLLECTION_AUTH);
 
 		$array = array();
 
@@ -100,7 +100,7 @@ class mobileAuthService {
 		$this->mongoConnect->connect();
 		$this->conn = $this->mongoConnect->connection;
 		$database 	= $this->conn->{DATABASE_NAME};
-		$collection = $database->selectCollection(COLLECTION_MOBILE_AUTH);
+		$collection = $database->selectCollection(COLLECTION_AUTH);
 		
 		//how to find a single document in a collection by some condition and limiting the returned fields.
 		//$result = $collection->findOne(array('mobile_number' => $item->mobile_number));
@@ -120,7 +120,7 @@ class mobileAuthService {
 		$this->mongoConnect->connect();
 		$this->conn = $this->mongoConnect->connection;
 		$database 	= $this->conn->{DATABASE_NAME};
-		$collection = $database->selectCollection(COLLECTION_MOBILE_AUTH);
+		$collection = $database->selectCollection(COLLECTION_AUTH);
 		
 		//how to find a single document in a collection by some condition and limiting the returned fields.
 		//$result = $collection->findOne(array('mobileNumber' => $item->mobileNumber));
@@ -138,7 +138,7 @@ class mobileAuthService {
 		$this->mongoConnect->connect();
 		$this->conn = $this->mongoConnect->connection;
 		$database 	= $this->conn->{DATABASE_NAME};
-		$collection = $database->selectCollection(COLLECTION_MOBILE_AUTH);
+		$collection = $database->selectCollection(COLLECTION_AUTH);
 		
 		//how to find a single document in a collection by some condition and limiting the returned fields.
         $output = $collection->findOne(array('mobileNumber' => $item->mobileNumber),array('_id' => 0));

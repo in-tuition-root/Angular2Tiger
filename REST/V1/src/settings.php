@@ -10,7 +10,7 @@ return [
 
         // Monolog settings
         'logger' => [
-            'name' => 'dealsencash-app',
+            'name' => 'in-tuition-app',
             'path' => __DIR__ . '/../logs/app.log',
         ],
     ],

@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/config.php';
-require_once __DIR__ . '/../services/mobileAuthService.php';
+require_once __DIR__ . '/../services/authServices.php';
 /**
  * @author Pramod Kumar Raghav
  *
@@ -35,8 +35,8 @@ require_once __DIR__ . '/../services/mobileAuthService.php';
 		$item->password = $usernamePassword[1];
 
         // Let create the mobileAuth object
-        $mobileAuthService = new mobileAuthService();
-        $output = $mobileAuthService->isThisValidUser($item);
+        $authServices = new authServices();
+        $output = $authServices->isThisValidUser($item);
 
         if($output['result']){
             $response = $next($request, $response);
