@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e15c0418-f9c8-470c-b242-f30d26704538" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/REST/V1/src/include/services/mobileAuthService.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/REST/V1/src/include/utility/secureKey.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/REST/V1/src/include/config/config.php" afterPath="$PROJECT_DIR$/REST/V1/src/include/config/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/REST/V1/src/include/utility/authenticateMiddleware.php" afterPath="$PROJECT_DIR$/REST/V1/src/include/utility/authenticateMiddleware.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/REST/V1/src/include/utility/utility.php" afterPath="$PROJECT_DIR$/REST/V1/src/include/utility/utility.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/REST/V1/.gitignore" afterPath="$PROJECT_DIR$/REST/V1/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/REST/V1/src/include/services/authServices.php" afterPath="$PROJECT_DIR$/REST/V1/src/include/services/authServices.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/REST/V1/src/include/services/usersAdminService.php" afterPath="$PROJECT_DIR$/REST/V1/src/include/services/usersAdminService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/REST/V1/src/model/UserProfile.php" afterPath="$PROJECT_DIR$/REST/V1/src/model/UserProfile.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/REST/V1/src/routes/utilityRoute.php" afterPath="$PROJECT_DIR$/REST/V1/src/routes/utilityRoute.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/REST/V1/src/settings.php" afterPath="$PROJECT_DIR$/REST/V1/src/settings.php" />
     </list>
     <ignored path="Angular2Tiger.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utilityRoute.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="utilityRoute.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/REST/V1/src/routes/utilityRoute.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="64" column="48" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="48" />
+            <state relative-caret-position="600">
+              <caret line="197" column="3" selection-start-line="197" selection-start-column="3" selection-end-line="197" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -55,17 +53,17 @@
         <entry file="file://$PROJECT_DIR$/REST/V1/src/model/UserProfile.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="22">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="authServices.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="authServices.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/REST/V1/src/include/services/authServices.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="202">
-              <caret line="97" column="35" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="35" />
+              <caret line="98" column="35" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -124,8 +122,8 @@
       <list>
         <option value="$PROJECT_DIR$/REST/V1/public/index.php" />
         <option value="$PROJECT_DIR$/REST/V1/src/include/config/config.php" />
-        <option value="$PROJECT_DIR$/REST/V1/src/include/services/authServices.php" />
         <option value="$PROJECT_DIR$/REST/V1/src/include/utility/authenticateMiddleware.php" />
+        <option value="$PROJECT_DIR$/REST/V1/src/include/services/authServices.php" />
         <option value="$PROJECT_DIR$/REST/V1/src/routes/utilityRoute.php" />
       </list>
     </option>
@@ -523,12 +521,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1462471065845</updated>
-      <workItem from="1462471067186" duration="20463000" />
+      <workItem from="1462471067186" duration="21011000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20463000" />
+    <option name="totallyTimeSpent" value="21011000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -715,15 +713,7 @@
     <entry file="file://$PROJECT_DIR$/REST/V1/src/model/UserProfile.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/REST/V1/src/routes/utilityRoute.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="64" column="48" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="48" />
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -731,7 +721,15 @@
     <entry file="file://$PROJECT_DIR$/REST/V1/src/include/services/authServices.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
-          <caret line="97" column="35" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="35" />
+          <caret line="98" column="35" selection-start-line="98" selection-start-column="20" selection-end-line="98" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/REST/V1/src/routes/utilityRoute.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="197" column="3" selection-start-line="197" selection-start-column="3" selection-end-line="197" selection-end-column="3" />
           <folding />
         </state>
       </provider>

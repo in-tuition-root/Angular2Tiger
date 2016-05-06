@@ -30,6 +30,7 @@ class authServices {
 		$authData = new stdClass();
 
         $authData->accessLevel = "Full";
+
 		$this->mongoConnect->connect();
 		$this->conn = $this->mongoConnect->connection;
 		$database 	= $this->conn->{DATABASE_NAME};
