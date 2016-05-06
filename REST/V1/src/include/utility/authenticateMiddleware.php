@@ -22,7 +22,7 @@ require_once __DIR__ . '/../services/authServices.php';
     {
 		$item = new stdClass();
 		
-		$item->mobileNumber = $request->getHeaderLine('Mobile-Number');
+		$item->_id = $request->getHeaderLine('User-id');
 		// Let decrypt the basic authorization
 		$basicAuthorization = $request->getHeaderLine('Authorization');
 		$authorization = explode(" ", $basicAuthorization);
@@ -33,7 +33,7 @@ require_once __DIR__ . '/../services/authServices.php';
 
 		$item->name = $usernamePassword[0];
 		$item->password = $usernamePassword[1];
-
+        
         // Let create the mobileAuth object
         $authServices = new authServices();
         $output = $authServices->isThisValidUser($item);

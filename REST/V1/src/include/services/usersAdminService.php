@@ -105,7 +105,7 @@ class usersAdminService {
 		
 		//how to find a single document in a collection by some condition and limiting the returned fields.
 		//$result = $collection->findOne(array('mobile_number' => $item->mobile_number));
-		$result = $collection->findOne(array('mobileNumber' => $item->mobileNumber),array('_id' => 0));
+		$result = $collection->findOne(array('mobileNumber' => $item->mobileNumber));
 		
 		return $result;
 	}

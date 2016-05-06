@@ -43,7 +43,7 @@ class authServices {
 		$encryptedPassword = $hash["encrypted"]; // encrypted password
 		$salt = $hash["salt"]; // salt
 
-		$array["mobileNumber"] 			=	$item->mobileNumber;
+		$array["_id"] 	=	new MongoId($item->_id);
 		$array["encryptedPassword"] 	=	$encryptedPassword;
 		$array["salt"] 					=	$salt;
 
@@ -96,7 +96,7 @@ class authServices {
      *  @param $item
      *  @return object
 	**/
-	public function getUserByMobile($item){
+	public function getUserByID($item){
 		$result = new stdClass();
 		$this->mongoConnect->connect();
 		$this->conn = $this->mongoConnect->connection;
@@ -105,7 +105,7 @@ class authServices {
 		
 		//how to find a single document in a collection by some condition and limiting the returned fields.
 		//$result = $collection->findOne(array('mobile_number' => $item->mobile_number));
-		$result = $collection->findOne(array('mobileNumber' => $item->mobileNumber),array('_id' => 0));
+		$result = $collection->findOne(array('_id' => new MongoId($item->_id)));
 		
 		return $result;
 	}
@@ -140,9 +140,9 @@ class authServices {
 		$this->conn = $this->mongoConnect->connection;
 		$database 	= $this->conn->{DATABASE_NAME};
 		$collection = $database->selectCollection(COLLECTION_AUTH);
-		
+
 		//how to find a single document in a collection by some condition and limiting the returned fields.
-        $output = $collection->findOne(array('mobileNumber' => $item->mobileNumber),array('_id' => 0));
+        $output = $collection->findOne(array('_id' => new MongoId($item->_id)),array('_id' => 0));
 
 
         if($output){

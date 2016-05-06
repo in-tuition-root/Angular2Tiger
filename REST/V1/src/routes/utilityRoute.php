@@ -57,14 +57,13 @@ $app->group('/utils', function () use ($app) {
         $item = new stdClass();
         $output = new stdClass();
 
-        $item->mobileNumber = $request->getHeaderLine('Mobile-Number');
+        $item->_id = $request->getHeaderLine('User-id');
 
         // Let create the mobileAuth object
         $authServices = new authServices();
-
-        $result = $authServices->getUserByMobile($item);
-        $item->_id = $result['_id'];
+        $result = $authServices->getUserByID($item);
         $item->authData = $result['authData'];
+
         // Let generate the new JWT token
         $output->jwt = generateNewToken($item);
         $output->result = true;
@@ -135,15 +134,22 @@ $app->group('/utils', function () use ($app) {
                 }
                 // Now create the new user
                 $result = $usersAdminService->createUsers($item);
+
                 if($result){
+                    // Let get the newly inserted user info
+                    $user = $usersAdminService->getUserByMobile($item);
+                    $item->_id = $user['_id']->{'$id'};
+
                     // New user document created successfully its time to create new mobileAuth document for this user
                     $authService = new authServices();
 
                     $result = $authService->createMobileAuth($item);
                     if($result){
                         $data = new stdClass();
-                        $user = $authService->getUserByMobile($item);
-                        $data->_id = $user['_id'];
+                        $data->_id = $user['_id']->{'$id'};
+
+                        $user = $authService->getUserByID($item);
+                        
                         $data->authData = $user['authData'];
                         //wow great we have successfully create user and mobileAuth its time to generate token
                         $output->jwt = generateNewToken($data);

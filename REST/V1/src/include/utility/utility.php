@@ -90,7 +90,7 @@ use \Firebase\JWT\JWT;
 		return TRUE;
 	}
 
-	function generateNewToken($authData){
+	function generateNewToken($item){
                 
         $tokenId    = base64_encode(mcrypt_create_iv(32)); //Generating a random" secure enough" string for
         $issuedAt   = time();
@@ -107,7 +107,7 @@ use \Firebase\JWT\JWT;
             'iss'  => $serverName,       // Issuer
             'nbf'  => $notBefore,        // Not before
             'exp'  => $expire,           // Expire
-            'data' => $authData          // user access level or auth data
+            'data' => $item          // user access level or auth data
         ];
 
         header('Content-type: application/json');
