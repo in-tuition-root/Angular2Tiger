@@ -79,6 +79,7 @@ $app->group('/utils', function () use ($app) {
         $output->jwt = generateNewToken($tokenData);
         $output->result = true;
         $output->message = "Login successfully.";
+        $output->userID = $item->_id;
         $response->withJson($output);
         return $response;
     })->add( new authenticateMiddleware());
@@ -167,6 +168,7 @@ $app->group('/utils', function () use ($app) {
 
                         $output->result = true;
                         $output->message = "User created successfully.";
+                        $output->userID = $data->_id;
                         $response->withStatus(201); // Created
                     }else{
                         // Oh no mobile auth creation failed. We have to delete the user document from the user collection
