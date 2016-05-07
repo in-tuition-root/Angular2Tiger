@@ -32,9 +32,10 @@ $container["jwt"] = function ($container) {
 $app->add(new \Slim\Middleware\JwtAuthentication([
     "path" => "/",
     "secure" => false,
-    "passthrough" => ["/utils", "/api"],
+    "passthrough" => ["/utils", "/api", "/user" ,"/tutorUtils"],
     "secret" => MY_SECRET_KEY
 ]));
+
 
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';

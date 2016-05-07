@@ -52,7 +52,7 @@ class usersAdminService {
      *  @param $item
      *  @return object
 	**/
-	public function updateUsers($item){
+	public function updateUsers($item,$data){
 
 		$this->mongoConnect->connect();
 		$this->conn = $this->mongoConnect->connection;
@@ -61,15 +61,13 @@ class usersAdminService {
 
 		$array = array();
 		//array $criteria , array $new_object [, array $options = array() ]
-		foreach ($item  as $key=>$value){
+		foreach ($data  as $key=>$value){
 			$array[$key] = $value;
 		}
 		
 		//New data
 		$newdata = array('$set' => $array);
-		
-		// Where mobileNumber is equal to $item->mobileNumber
-		$result = $collection->update(array('mobileNumber' => "$item->mobileNumber"), $newdata);
+		$result = $collection->update(array('_id' => $item->_id), $newdata);
 
 		return $result;
 	}
@@ -109,7 +107,25 @@ class usersAdminService {
 		
 		return $result;
 	}
-	
+
+
+	/**
+	 *	getUserByEmail
+	 *  @param $item
+	 *  @return object
+	 **/
+	public function getUserByEmail($item){
+		$this->mongoConnect->connect();
+		$this->conn = $this->mongoConnect->connection;
+		$database 	= $this->conn->{DATABASE_NAME};
+		$collection = $database->selectCollection(COLLECTION_USER);
+
+		//how to find a single document in a collection by some condition and limiting the returned fields.
+		//$result = $collection->findOne(array('mobile_number' => $item->mobile_number));
+		$result = $collection->findOne(array('email' => $item->email));
+
+		return $result;
+	}
 	
 	/**
      *	Is user exits

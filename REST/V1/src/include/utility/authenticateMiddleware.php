@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../services/authServices.php';
+require_once __DIR__ . '/../services/usersAdminService.php';
 /**
  * @author Pramod Kumar Raghav
  *
@@ -21,28 +22,39 @@ require_once __DIR__ . '/../services/authServices.php';
     public function __invoke($request, $response, $next)
     {
 		$item = new stdClass();
-		
-		$item->_id = $request->getHeaderLine('User-id');
-		// Let decrypt the basic authorization
-		$basicAuthorization = $request->getHeaderLine('Authorization');
-		$authorization = explode(" ", $basicAuthorization);
 
-		$encryptedAuthorization = $authorization[1];
-
-		$usernamePassword = explode(":", base64_decode ($encryptedAuthorization)); // username:password
-
-		$item->name = $usernamePassword[0];
-		$item->password = $usernamePassword[1];
-        
-        // Let create the mobileAuth object
-        $authServices = new authServices();
-        $output = $authServices->isThisValidUser($item);
-
-        if($output['result']){
-            $response = $next($request, $response);
+        $item->IsMobile = $request->getHeaderLine('Is-Mobile');
+        $userAdminService = new usersAdminService();
+        if($item->IsMobile == 'true'){
+            $item->mobileNumber = $request->getHeaderLine('User-id');
+            $user = $userAdminService->getUserByMobile($item);
         }else{
-            $response->withStatus(401); // Unauthorized
+            $item->email = $request->getHeaderLine('User-id');
+            $user = $userAdminService->getUserByEmail($item);
         }
-		return $response;
+        if($user){
+            $item->_id = $user['_id']->{'$id'};
+            // Let decrypt the basic authorization
+            $basicAuthorization = $request->getHeaderLine('Authorization');
+            $authorization = explode(" ", $basicAuthorization);
+
+            $encryptedAuthorization = $authorization[1];
+
+            $usernamePassword = explode(":", base64_decode ($encryptedAuthorization)); // username:password
+
+            $item->name = $usernamePassword[0];
+            $item->password = $usernamePassword[1];
+
+            // Let create the mobileAuth object
+            $authServices = new authServices();
+            $output = $authServices->isThisValidUser($item);
+
+            if($output['result']){
+                $response = $next($request, $response);
+            }else{
+                $response->withStatus(401); // Unauthorized
+            }
+        }
+        return $response;
     }	
  }

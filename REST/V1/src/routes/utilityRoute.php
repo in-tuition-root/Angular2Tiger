@@ -51,21 +51,32 @@ $app->group('/utils', function () use ($app) {
      * API to login
      */
 
-    $app->get('/mobile_login', function (Request $request, Response $response, $args) {
-        $this->logger->info("In-Tuition '/mobile_login' route");
+    $app->get('/login', function (Request $request, Response $response, $args) {
+        $this->logger->info("In-Tuition '/login' route");
 
         $item = new stdClass();
         $output = new stdClass();
+        $tokenData = new stdClass();
 
-        $item->_id = $request->getHeaderLine('User-id');
+        $item->IsMobile = $request->getHeaderLine('Is-Mobile');
+        $userAdminService = new usersAdminService();
+        if($item->IsMobile == 'true'){
+            $item->mobileNumber = $request->getHeaderLine('User-id');
+            $user = $userAdminService->getUserByMobile($item);
+        }else{
+            $item->email = $request->getHeaderLine('User-id');
+            $user = $userAdminService->getUserByEmail($item);
+        }
+        $item->_id = $user['_id']->{'$id'};
 
         // Let create the mobileAuth object
         $authServices = new authServices();
         $result = $authServices->getUserByID($item);
-        $item->authData = $result['authData'];
-
+        $tokenData->_id = $item->_id;
+        $tokenData->authData = $result['authData'];
+        
         // Let generate the new JWT token
-        $output->jwt = generateNewToken($item);
+        $output->jwt = generateNewToken($tokenData);
         $output->result = true;
         $output->message = "Login successfully.";
         $response->withJson($output);
@@ -92,7 +103,7 @@ $app->group('/utils', function () use ($app) {
 
         // get the mobile number and password form header parameters
 
-        $item->mobileNumber = $request->getHeaderLine('Mobile-Number');
+        $item->mobileNumber = $request->getHeaderLine('User-id');
 
         // Let decrypt the basic authorization
         $basicAuthorization = $request->getHeaderLine('Authorization');
@@ -143,7 +154,7 @@ $app->group('/utils', function () use ($app) {
                     // New user document created successfully its time to create new mobileAuth document for this user
                     $authService = new authServices();
 
-                    $result = $authService->createMobileAuth($item);
+                    $result = $authService->createAuth($item);
                     if($result){
                         $data = new stdClass();
                         $data->_id = $user['_id']->{'$id'};

@@ -26,7 +26,7 @@ class authServices {
      *
 	 * 	@return object
 	*/
-	public function createMobileAuth($item){
+	public function createAuth($item){
 		$authData = new stdClass();
 
         $authData->accessLevel = "Full";
@@ -61,7 +61,7 @@ class authServices {
      *  @param $item
      *  @return object
 	**/
-	public function updateMobileAuth($item){
+	public function updateAuth($item){
 
 		$this->mongoConnect->connect();
 		$this->conn = $this->mongoConnect->connection;

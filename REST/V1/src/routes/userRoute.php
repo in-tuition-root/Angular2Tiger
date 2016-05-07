@@ -16,15 +16,19 @@ $app->get('/user', function (Request $request, Response $response, $args) {
     $item = new stdClass();
     $output = new stdClass();
 
-    $item->mobileNumber = $request->getHeaderLine('Mobile-Number');
+    $item->IsMobile = $request->getHeaderLine('Is-Mobile');
+    $userAdminService = new usersAdminService();
 
-    // Let create the mobileAuth object
-    $mobileAuthService = new mobileAuthService();
+    if($item->IsMobile == 'true'){
+        $item->mobileNumber = $request->getHeaderLine('User-id');
+        $user = $userAdminService->getUserByMobile($item);
+    }else{
+        $item->email = $request->getHeaderLine('User-id');
+        $user = $userAdminService->getUserByEmail($item);
+    }
 
-    $result = $mobileAuthService->getUserByMobile($item);
-
-    if($result){
-        $output->user =  $result;
+    if($user){
+        $output->data =  $user;
         $output->result = true;
     }else{
         $output->result = false;
@@ -32,4 +36,23 @@ $app->get('/user', function (Request $request, Response $response, $args) {
     }
     $response->withJson($output);
     return $response;
+});
+
+$app->put('/user', function (Request $request, Response $response, $args) {
+    $item = new stdClass();
+    $userAdminService = new usersAdminService();
+
+    $parsedBody = $request->getParsedBody();
+    $item->IsMobile = $request->getHeaderLine('Is-Mobile');
+
+    if($item->IsMobile == 'true'){
+        $item->mobileNumber = $request->getHeaderLine('User-id');
+        $user = $userAdminService->getUserByMobile($item);
+    }else{
+        $item->email = $request->getHeaderLine('User-id');
+        $user = $userAdminService->getUserByEmail($item);
+    }
+
+    $item->_id=$user['_id'];
+    $userAdminService->updateUsers($item,$parsedBody);
 });
