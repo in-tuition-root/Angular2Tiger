@@ -23,6 +23,7 @@ define('DATABASE_PORT', '27017');
 define('COLLECTION_AUTH', 'Authorization');
 //define('COLLECTION_EMAIL_AUTH', 'EmailAuth');
 define('COLLECTION_USER', 'Users');
+define('COLLECTION_SUBJECTS', 'Subjects');
 
 
 /** DEFINE THE RESPONSE CODE**/

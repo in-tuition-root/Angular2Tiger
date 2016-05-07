@@ -7,3 +7,6 @@ require __DIR__ . '/routes/userRoute.php';
 
 //tutor routes
 require __DIR__ . '/routes/tutorRoute.php';
+
+//subject routes
+require __DIR__ . '/routes/subjectRoute.php';
