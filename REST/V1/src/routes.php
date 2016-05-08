@@ -10,3 +10,6 @@ require __DIR__ . '/routes/tutorRoute.php';
 
 //subject routes
 require __DIR__ . '/routes/subjectRoute.php';
+
+//student routes
+require __DIR__ . '/routes/studentRoute.php';

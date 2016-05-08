@@ -95,7 +95,7 @@ use \Firebase\JWT\JWT;
         $tokenId    = base64_encode(mcrypt_create_iv(32)); //Generating a random" secure enough" string for
         $issuedAt   = time();
         $notBefore  = $issuedAt + 10;  //Adding 10 seconds
-        $expire     = $notBefore + 30; // Adding 86400 seconds i.e 24 hour/ 1 day
+        $expire     = $notBefore + 86400; // Adding 86400 seconds i.e 24 hour/ 1 day
         $serverName = SERVER_NAME;
 
         /*

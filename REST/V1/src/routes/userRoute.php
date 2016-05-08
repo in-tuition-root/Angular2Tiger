@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * Created by PhpStorm.
  * User: praghav
  * Date: 5/5/2016
@@ -16,16 +16,10 @@ $app->get('/user', function (Request $request, Response $response, $args) {
     $item = new stdClass();
     $output = new stdClass();
 
-    $item->IsMobile = $request->getHeaderLine('Is-Mobile');
+    $item->_id = $request->getHeaderLine('User-id');
     $userAdminService = new usersAdminService();
 
-    if($item->IsMobile == 'true'){
-        $item->mobileNumber = $request->getHeaderLine('User-id');
-        $user = $userAdminService->getUserByMobile($item);
-    }else{
-        $item->email = $request->getHeaderLine('User-id');
-        $user = $userAdminService->getUserByEmail($item);
-    }
+    $user = $userAdminService->getUserByID($item);
 
     if($user){
         $output->data =  $user;
@@ -43,16 +37,7 @@ $app->put('/user', function (Request $request, Response $response, $args) {
     $userAdminService = new usersAdminService();
 
     $parsedBody = $request->getParsedBody();
-    $item->IsMobile = $request->getHeaderLine('Is-Mobile');
 
-    if($item->IsMobile == 'true'){
-        $item->mobileNumber = $request->getHeaderLine('User-id');
-        $user = $userAdminService->getUserByMobile($item);
-    }else{
-        $item->email = $request->getHeaderLine('User-id');
-        $user = $userAdminService->getUserByEmail($item);
-    }
-
-    $item->_id=$user['_id'];
+    $item->_id = $request->getHeaderLine('User-id');
     $userAdminService->updateUsers($item,$parsedBody);
 });

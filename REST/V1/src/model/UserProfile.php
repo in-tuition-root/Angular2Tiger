@@ -28,5 +28,4 @@ class UserProfile {
     public $gender;
     /* @var \DateTime $dateOfBirth User&#39;s date of birth. */
     public $dateOfBirth;
-    
 }

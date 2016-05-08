@@ -15,6 +15,7 @@ require_once __DIR__ . '/../include/services/authServices.php';
 
 include __DIR__ . '/../model/UserProfile.php';
 
+
 /**
  * ----------- METHODS WITHOUT AUTHENTICATION ---------------------------------
  */

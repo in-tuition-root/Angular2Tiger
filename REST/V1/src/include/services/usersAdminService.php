@@ -67,7 +67,7 @@ class usersAdminService {
 		
 		//New data
 		$newdata = array('$set' => $array);
-		$result = $collection->update(array('_id' => $item->_id), $newdata);
+		$result = $collection->update(array('_id' => new MongoId($item->_id)), $newdata);
 
 		return $result;
 	}
@@ -123,6 +123,25 @@ class usersAdminService {
 		//how to find a single document in a collection by some condition and limiting the returned fields.
 		//$result = $collection->findOne(array('mobile_number' => $item->mobile_number));
 		$result = $collection->findOne(array('email' => $item->email));
+
+		return $result;
+	}
+
+	/**
+	 *	getUserByID
+	 *  @param $item
+	 *  @return object
+	 **/
+	public function getUserByID($item){
+		$this->mongoConnect->connect();
+		$this->conn = $this->mongoConnect->connection;
+		$database 	= $this->conn->{DATABASE_NAME};
+		$collection = $database->selectCollection(COLLECTION_USER);
+
+		//how to find a single document in a collection by some condition and limiting the returned fields.
+		//$result = $collection->findOne(array('mobile_number' => $item->mobile_number));
+
+		$result = $collection->findOne(array('_id' => new MongoId($item->_id)));
 
 		return $result;
 	}
