@@ -66,4 +66,46 @@ class tutorServices
         $result = $collection->find($query);
         return $result;
     }
+
+    public function getTutors($filterParamsArray){
+        $this->mongoConnect->connect();
+        $this->conn = $this->mongoConnect->connection;
+        $database 	= $this->conn->{DATABASE_NAME};
+        $collection = $database->selectCollection(COLLECTION_USER);
+
+        $query = array();
+        array_push($query,array('tutor' => array('$exists' => true)));
+
+        foreach($filterParamsArray as $key => $value){
+            $filter = array();
+            if(isset($value)){        //check if the value of the filter is null
+                if(is_array($value) && ($key !== "location")){   //check if the value is an array
+                    $array = array();
+                    foreach($value as $val){       //create an array to make a 'or' where clause
+                        array_push($array,array($key => $val));
+                    }
+                    $filter['$or'] = $array;
+                    array_push($query,$filter);
+                    continue;
+                }
+
+                if($key == "location"){
+                    $filter[$key] =  array('$near'=>array('$geometry'=>array('type'=>"Point",'coordinates'=>array($val[0],$val[1]))));
+                    array_push($query,$filter);
+                    continue;
+                }
+
+                $filter[$key] = $value;
+                array_push($query,$filter);
+            }
+        }
+
+        $cursor = $collection->find(array('$and'=> $query));
+        $cursor->limit(1);
+
+
+        $result = iterator_to_array($cursor);
+
+        return $result;
+    }
 }

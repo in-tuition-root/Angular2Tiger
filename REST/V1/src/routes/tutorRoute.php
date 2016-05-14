@@ -13,22 +13,51 @@ require_once __DIR__ . '/../include/services/tutorServices.php';
 $app->group('/tutorUtils', function () use ($app) {
 
     $app->get('/tutors', function (Request $request, Response $response, $args) {
+
         $output = new stdClass();
 
+        $paramsArray = $request->getQueryParams();
         $tutorServices = new tutorServices();
-        $tutors = $tutorServices->getAllTutors();
-        if ($tutors->count()) {
-            $data = array();
-            $i = 0;
-            foreach ($tutors as $tutor) {
-                $data[$i] = $tutor;
-                $i = $i + 1;
+
+        $filterParamsArray = array();
+
+        //make array according to mongodb fields
+        foreach($paramsArray as $key => $val){
+            if($key == "location"){
+                if(is_array($val)){
+                    $array = array();
+                    foreach($val as $geoPoint){
+                        array_push($array,(float)$geoPoint);
+                    }
+                }
+                $filterParamsArray["location"] = $array;
+                continue;
             }
-            $output->data = $data;
+            if($key == "Subjects"){
+                $filterParamsArray["tutor.teaches.Subjects"] = $val;
+                continue;
+            }
+            if($key == "Classes"){
+                $filterParamsArray["tutor.teaches.Class"] = $val;
+                continue;
+            }
+
+            if(isNumericKey($key)){
+                $filterParamsArray["tutor." . $key] = (int)$val;
+                continue;
+            }
+
+            $filterParamsArray["tutor." . $key] = $val;
+        }
+
+        $tutors = $tutorServices->getTutors($filterParamsArray);
+        if($tutors) {
+            $output->tutors = $tutors;
             $output->result = true;
-        } else {
+            $output->message = "Tutors Successfully retrieved.";
+        }else{
             $output->result = false;
-            $output->message = "No tutors found!!";
+            $output->message = "Sorry, no tutor found that matches your selection criteria.";
         }
         $response->withJson($output);
     });
