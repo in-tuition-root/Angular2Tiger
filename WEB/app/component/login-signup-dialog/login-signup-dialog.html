@@ -1,0 +1,35 @@
+<paper-dialog class="login-signup-dialog" opened="true">
+
+    <div>
+        <div class="col-md-6">
+            <div class="in-tuition_logo" class="row">
+                <iron-label>
+                    <iron-image src="app/components/login-signup-dialog/in-tuition_icon.png"></iron-image>
+                </iron-label>
+                <h1 class="logo">LEARN, EXCEL</h1>
+                <h1 class="logo">AND GROW</h1>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form">
+                <div>
+                    <iron-icon id="close-button" icon="icons:close"></iron-icon>
+                </div>
+
+                <div class="login-signup-tabs">
+                    <paper-tabs id="plain-tabs" selected="{{tabIndex}}">
+                        <paper-tab id="login" (click)="onLogin()">Login</paper-tab>
+                        <paper-tab id="signup" (click)="onSignup()">Sign Up</paper-tab>
+                    </paper-tabs>
+                </div>
+
+                <div>
+                    <login *ngIf="isLogin"> </login>
+                    <signup *ngIf="!isLogin"> </signup>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</paper-dialog>

@@ -1,0 +1,12 @@
+<div *ngIf="user != null">
+    <h2>{{user.name}} details!</h2>
+    <div>
+        <label>id: </label>{{user.id}}</div>
+    <div>
+        <label>name: </label>
+        <input [(ngModel)]="user.name" placeholder="name" />
+    </div>
+    <!-- #docregion back-button -->
+    <button (click)="goBack()">Back</button>
+    <!-- #enddocregion back-button -->
+</div>

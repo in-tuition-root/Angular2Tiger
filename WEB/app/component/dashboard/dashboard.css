@@ -1,0 +1,46 @@
+#main { margin: 10px 0 }
+#main button { margin-bottom: 5px }
+.search * { margin: 10px 0; }
+.no-users { color: red; }
+.container { width: 100% }
+img { max-width: 50px; }
+
+
+.avatar-container {
+    position: relative;
+    border: 2px solid #00AA8D;
+    height: 90px;
+    padding: 2px;
+    width: 90px;
+    margin: auto;
+}
+
+.avatar-container .image {
+    background-image: url('../../../images/icon_512x512.png');
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+}
+
+.contact-info {
+    margin: 0 20px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.contact-info .name {
+    font-weight: bold;
+}
+
+.contact-info .email {
+    color: #999;
+}
+
+paper-item {
+    @apply(--layout-center-center);
+    height: 54px;
+}
+
+paper-icon-button {
+    --paper-icon-button-ink-color: white;
+}

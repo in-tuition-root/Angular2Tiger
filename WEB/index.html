@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <base href="/">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>In Tuition</title>
+
+        <!-- Disable tap highlight on IE -->
+        <meta name="msapplication-tap-highlight" content="no">
+
+        <!-- Web Application Manifest -->
+        <link rel="manifest" href="manifest.json">
+
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="application-name" content="In Tuition">
+        <link rel="icon" sizes="192x192" href="images/touch/icon-192x192.png">
+
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="In Tuition">
+        <link rel="apple-touch-icon" href="images/touch/icon-256x256.png">
+
+
+
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+        <meta name="msapplication-TileColor" content="#2F3BA2">
+
+        <!-- Color the status bar on mobile devices -->
+        <meta name="theme-color" content="#2F3BA2">
+
+
+        <link rel="canonical" href="http://www.in-tuition.in/">
+
+
+        <!-- Polyfill(s) for older browsers -->
+        <!-- 1. Load libraries -->
+        <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+        <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+
+        <script src="node_modules/zone.js/dist/zone.js"></script>
+        <script src="node_modules/reflect-metadata/Reflect.js"></script>
+
+        <script src="node_modules/systemjs/dist/system.js"></script>
+        <script src="node_modules/rxjs/bundles/Rx.min.js"></script>
+
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+        <script src="node_modules/ng2-bootstrap/bundles/ng2-bootstrap.min.js"></script>
+
+        <!-- Polyfill Web Components support for older browsers -->
+        <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+        <script>
+            window.Polymer = window.Polymer || {};
+            window.Polymer.dom = 'shadow';
+        </script>
+
+        <!-- Import element -->
+
+        <link rel="import" href="polymer/elements.html">
+        <link rel="import" href="polymer/styles.html">
+        <script src="systemjs.config.js"></script>
+
+        <script>
+            System.import('app').catch(function(err){ console.error(err);  });
+        </script>
+    </head>
+
+    <body unresolved>
+        <my-app></my-app>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+<h3>Please sign up to use all features</h3>
+<form id="signup_form" [ngFormModel]="myForm" (ngSubmit)="onSignup()">
+    <paper-input name="mobile_number" label="Mobile Number" required></paper-input>
+
+    <div>
+        <paper-input label="Email ID" [ngFormControl]="myForm.find('email')" type="email" id="email" #email="ngForm"></paper-input>
+        <!--<span *ngIf="email.errors['isTaken']">This username has already been taken</span>-->
+    </div>
+    <paper-input label="Password" [ngFormControl]="myForm.find('password')" type="password" id="password" required></paper-input>
+
+    <div>
+        <paper-input label="Confirm Password" [ngFormControl]="myForm.find('confirmPassword')" type="password" id="confirm-password" #confirmPassword="ngForm" required></paper-input>
+        <span *ngIf="!confirmPassword.pristine && confirmPassword.errors != null && confirmPassword.errors['passwordsNotMatch']">Passwords do not match</span>
+    </div>
+    <paper-button id="signup-button"  type="submit" [disabled]="!myForm.valid" raised>Sign Up</paper-button>
+</form>
